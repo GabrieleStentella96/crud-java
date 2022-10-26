@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,16 +21,18 @@ import com.epicode.eccezione.EccezioneRisorsaMancante;
 import com.epicode.modello.Impiegato;
 import com.epicode.repository.ImpiegatoRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @RequestMapping("/api/v1/")
+@CrossOrigin( origins= "*")
+@EntityScan(basePackages = {"com.epicode.modello"})
 
 public class ControlloImpiegato {
 	@Autowired
 	private ImpiegatoRepository impiegatoRepository;
 	
 	
-	@GetMapping("/Impiegato")
+	@GetMapping
 	public List<Impiegato> getAllEmployees(){
 		return impiegatoRepository.findAll();
 	}		
